@@ -1,31 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import{ApiService} from '../employeeapi.service';
-import { Observable, from } from 'rxjs';
+import { Subscription } from 'rxjs';
 import{Employee} from'../employee';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 //import{Employee} from './employee.model';
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent implements OnInit ,OnDestroy {
   employees:Employee[]=[];
   page:number=1;
-  
-
-  constructor(public dataService: ApiService) { 
+  private empSub:Subscription;
+  employeeId:string;
+  employee:Employee;
+  constructor(public dataService: ApiService,public route:ActivatedRoute) { 
    
   }
 
   ngOnInit() {
     
-    this.dataService.getEmpolyees((data)=>
-    {
-      this.employees=data;
-      console.log(data);
+    this.dataService.getEmpolyees();
+    this.empSub= this.dataService.getEmployeeUpdateListener().subscribe((employess)=>{
+      this.employees=employess;
     });
-    
    
   }
-
+  ngOnDestroy()
+  {
+    this.empSub.unsubscribe();
+  }
 }

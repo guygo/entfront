@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-custom">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand">
@@ -8,21 +8,18 @@
                 <span class="navbar-brand">EntManager</span>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a routerLink="">
+                <li ><a routerLink="">
                   home <span class="sr-only">(current)</span>
                 </a></li>
-                <li><a routerLink="/employees">Employees</a></li>
-                <li class="dropdown" dropdown> <!-- {1} -->
-                    <a dropdownToggle role="button"> <!-- {2} -->
-                      Dropdown <span class="caret"></span></a>
-                    <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                
+                <li class="dropdown" dropdown> 
+                    <a dropdownToggle role="button"> 
+                      Employees <span class="caret"></span></a>
+                    <ul *dropdownMenu class="dropdown-menu"> 
+                        <li><a routerLink="/createemployee">add Employee</a></li>
+                        <li><a routerLink="/employees">curents Employees</a></li>
+                        
+                        
                     </ul>
                 </li>
             </ul>

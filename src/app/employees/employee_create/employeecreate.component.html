@@ -1,19 +1,19 @@
 <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <form [formGroup]="formGroup" (validSubmit)="onSubmit()" class="form-inlineclass" form-horizontal>
+          <form  (submit)="onSubmit(employeeForm)" #employeeForm="ngForm" class="form-inlineclass" form-horizontal>
             <div class="row">
                     <div class="col-md-5 ">
                         <div class="form-group">
                         <label class="control-label">firstname</label>
-                        <input type="text" class="form-control" formControlName="first_name">
+                        <input type="text" name="first_name" class="form-control" [ngModel]="employee?.first_name">
                         </div>
                         <div>
                             
                         </div>
                         
                         <div class="form-group">
-                                <label for="email">LastName</label>
-                        <input type="text" class="form-control" formControlName="last_name" name="email" id="email">
+                                <label for="last_name">LastName</label>
+                        <input type="text" class="form-control" [ngModel]="employee?.last_name" name="last_name" id="last_name">
                         </div>
                     </div>
                     
@@ -22,11 +22,12 @@
                             <label class="control-label">hire date</label>
                            
                             <input type="text"
+                            name="hire_date"
                             placeholder="Datepicker"
                             class="form-control"
                             bsDatepicker
-                            
-                            [bsConfig]="{ isAnimated: true }" formControlName="hire_date">
+                            [ngModel]="employee?.hire_date"
+                            [bsConfig]="{ isAnimated: true }" >
                    
                                   
                             </div>
@@ -40,13 +41,14 @@
                             placeholder="Datepicker"
                             class="form-control"
                             bsDatepicker
-                            [bsConfig]="{ isAnimated: true }" formControlName="birth_date">
+                            name="birth_date"
+                            [bsConfig]="{ isAnimated: true }" [ngModel]="employee?.birth_date">
                             </div>
                         </div>
                         <div class="col-md-5">
                                 <div class="form-group">
                                         <label for="sel1">Gender:</label>
-                                        <select class="form-control" id="sel1" formControlName="gender">
+                                        <select name="gender" class="form-control" id="sel1" [ngModel]="employee?.gender">
                                           <option>M</option>
                                           <option>F</option>
                                           
@@ -54,7 +56,7 @@
                                       </div>
                             </div>
                 </div>
-            
+            <br>
             <div class="row">
                 <div class="col-md-8 ">
                         <button class="btn btn-default" type="button" (click)="onReset()">Reset</button>

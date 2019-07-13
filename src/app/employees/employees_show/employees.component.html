@@ -9,12 +9,13 @@
           </tr>
         </thead>
         <tbody>
-                <tr *ngFor="let item of employees | paginate: { itemsPerPage: 10, currentPage: page }">
-                        
+                <tr *ngFor="let item of employees | paginate: { itemsPerPage: 50, currentPage: page }">
+                       
                         <td>{{item.first_name}}</td>
                         <td>{{item.last_name}}</td>
                         <td>{{item.hire_date}}</td>
                         <td>{{item.birth_date}}</td>
+                <a [routerLink]="['/editemployee',item.id]" class="btn btn-danger">Edit</a>
                 </tr>
 </tbody>
 </table>

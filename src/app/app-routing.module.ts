@@ -6,7 +6,8 @@ import { EmployeecreateComponent } from './employees/employee_create/employeecre
 const routes: Routes = [
   
   {path:'employees',component:EmployeesComponent},
-  {path:'',component:EmployeecreateComponent},
+  {path:'createemployee',component:EmployeecreateComponent},
+  {path:'editemployee/:employeeId',component:EmployeecreateComponent},
   { path: '**', component: PageNotFoundComponentComponent }
 ];
 
