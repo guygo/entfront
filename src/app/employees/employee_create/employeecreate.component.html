@@ -1,69 +1,79 @@
+
 <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <form  (submit)="onSubmit(employeeForm)" #employeeForm="ngForm" class="form-inlineclass" form-horizontal>
+          <form  (submit)="onSubmit()" [formGroup]="formGroup" class="form-inlineclass" form-horizontal>
             <div class="row">
                     <div class="col-md-5 ">
-                        <div class="form-group">
-                        <label class="control-label">firstname</label>
-                        <input type="text" name="first_name" class="form-control" [ngModel]="employee?.first_name">
+                        <div class="form-group" [ngClass]="displayFieldCss('first_name')">
+                        <label for="first_name" class="control-label required">First name</label>
+                        <input type="text"  id="first_name"  formControlName="first_name" class="form-control" [ngModel]="employee?.first_name">
+                        <app-field-error-display [displayError]="isFieldValid('first_name')" errorMsg="Please enter first name">
+                                </app-field-error-display>
                         </div>
                         <div>
                             
                         </div>
                         
-                        <div class="form-group">
-                                <label for="last_name">LastName</label>
-                        <input type="text" class="form-control" [ngModel]="employee?.last_name" name="last_name" id="last_name">
+                        <div class="form-group" [ngClass]="displayFieldCss('last_name')">
+                                <label for="last_name" class="control-label required">Last name</label>
+                        <input type="text"   class="form-control" [ngModel]="employee?.last_name" formControlName="last_name"  id="last_name">
+                        <app-field-error-display [displayError]="isFieldValid('last_name')" errorMsg="Please enter last name">
+                                </app-field-error-display>
+                      
                         </div>
                     </div>
                     
                     <div class="col-md-5 ">
-                            <div class="form-group">
-                            <label class="control-label">hire date</label>
+                            <div class="form-group" [ngClass]="displayFieldCss('hire_date')">
+                            <label for="hire_date" class="control-label required">hire date</label>
                            
                             <input type="text"
-                            name="hire_date"
+                            formControlName="hire_date"
                             placeholder="Datepicker"
                             class="form-control"
                             bsDatepicker
+                            id="hire_date"
                             [ngModel]="employee?.hire_date"
                             [bsConfig]="{ isAnimated: true }" >
                    
-                                  
+                            <app-field-error-display [displayError]="isFieldValid('hire_date')" errorMsg="Please enter valid date">
+                                </app-field-error-display>  
                             </div>
                             <div>
                                 
                             </div>
                             
-                            <div class="form-group">
-                                    <label for="email">birth date</label>
+                            <div class="form-group" [ngClass]="displayFieldCss('birth_date')">
+                                    <label for="birth_date" class="control-label required">birth date</label>
                                     <input type="text"
+                                    id="birth_date"
                             placeholder="Datepicker"
                             class="form-control"
                             bsDatepicker
-                            name="birth_date"
+                            
+                            formControlName="birth_date"
                             [bsConfig]="{ isAnimated: true }" [ngModel]="employee?.birth_date">
-                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('birth_date')" errorMsg="Please enter valid date">
+                                </app-field-error-display>  
+                        </div>
                         </div>
                         <div class="col-md-5">
-                                <div class="form-group">
-                                        <label for="sel1">Gender:</label>
-                                        <select name="gender" class="form-control" id="sel1" [ngModel]="employee?.gender">
+                                <div class="form-group" [ngClass]="displayFieldCss('gender')">
+                                        <label for="sel1" class="control-label required">Gender:</label>
+                                        <select   formControlName="gender" class="form-control" id="sel1" [ngModel]="employee?.gender">
                                           <option>M</option>
                                           <option>F</option>
                                           
                                         </select>
+                                        <app-field-error-display [displayError]="isFieldValid('gender')" errorMsg="Please pick gender">
+                                </app-field-error-display>
                                       </div>
                             </div>
                 </div>
             <br>
-            <div class="row">
-                <div class="col-md-8 ">
-                        <button class="btn btn-default" type="button" (click)="onReset()">Reset</button>
-                        <button class="btn btn-primary pull-right" type="submit">Submit</button>
-                </div> 
-            </div>
+           
+            <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
           </form>
         </div>
       </div>
-     
+    

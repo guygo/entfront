@@ -1,4 +1,5 @@
-
+<div class="loader" *ngIf="isLoading"></div>
+<div *ngIf="!isLoading">
 <table class="table">
         <thead>
           <tr>
@@ -13,10 +14,12 @@
                        
                         <td>{{item.first_name}}</td>
                         <td>{{item.last_name}}</td>
-                        <td>{{item.hire_date}}</td>
-                        <td>{{item.birth_date}}</td>
+                        <td>{{item.hire_date.toLocaleDateString()}}</td>
+                        <td>{{item.birth_date.toLocaleDateString()}}</td>
                 <a [routerLink]="['/editemployee',item.id]" class="btn btn-danger">Edit</a>
                 </tr>
 </tbody>
 </table>
 <pagination-controls (pageChange)="page=$event"></pagination-controls>
+</div>
+ 

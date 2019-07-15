@@ -1,19 +1,19 @@
 export class Employee {
     id:string;
-    hire_date:string;
+    hire_date:Date;
     first_name: string;
     last_name: string;
-    birth_date:string;
+    birth_date:Date;
     constructor(json)
     {
        this.id=json.emp_no;
        
-       var d = new Date(json.hire_date);
-       this.hire_date=d.toLocaleDateString();
+       
+       this.hire_date=new Date(json.hire_date);
        this.first_name=json.first_name;
        this.last_name=json.last_name;
-       var d = new Date(json.birth_date);
-       this.birth_date=d.toLocaleDateString();
+       
+       this.birth_date=new Date(json.birth_date);
     }
     
   

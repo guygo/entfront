@@ -15,15 +15,18 @@ export class EmployeesComponent implements OnInit ,OnDestroy {
   private empSub:Subscription;
   employeeId:string;
   employee:Employee;
+  isLoading=false;
   constructor(public dataService: ApiService,public route:ActivatedRoute) { 
    
   }
 
   ngOnInit() {
-    
+
+    this.isLoading=true;
     this.dataService.getEmpolyees();
     this.empSub= this.dataService.getEmployeeUpdateListener().subscribe((employess)=>{
       this.employees=employess;
+      this.isLoading=false;
     });
    
   }

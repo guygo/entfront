@@ -16,15 +16,18 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { DepartmentsComponent } from './departments/departments.component';
 import { EmployeecreateComponent } from './employees/employee_create/employeecreate.component';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
+import { ValidateFieldsSubmitFormComponent } from './simpleForm/simple-form.component';
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
-   
+    FieldErrorDisplayComponent,
     PageNotFoundComponentComponent,
    
     DepartmentsComponent,
-   
+    ValidateFieldsSubmitFormComponent,
     EmployeecreateComponent
     
   ],
@@ -41,7 +44,13 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
-    NgBootstrapFormValidationModule.forRoot()
+    NgBootstrapFormValidationModule.forRoot(),
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      customClass: 'modal-content',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn'
+  })
   ],
   
   providers: [],
