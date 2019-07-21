@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import{ApiService} from '../employeeapi.service';
 import { FormGroup} from "@angular/forms";
 import swal from 'sweetalert2';
-import { NgForm,Validators,
-  FormControl,FormBuilder } from "@angular/forms";
+import { Validators,
+  FormControl } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Employee } from '../employee';
+import {mimeType} from "./mime-type.validator"
+
 @Component({
   selector: 'app-employeecreate',
   templateUrl: './employeecreate.component.html',
@@ -13,41 +15,77 @@ import { Employee } from '../employee';
 })
 export class EmployeecreateComponent implements OnInit {
   public employee;
+  imagePreview;
   formGroup: FormGroup;
   employeeId:string;
   mode='create';
+  
   message; 
-  constructor(public dataService: ApiService,public route:ActivatedRoute,private formBuilder: FormBuilder) { 
+  constructor(public dataService: ApiService,public route:ActivatedRoute) { 
    
   }
 
   submitted = false;
-
   
+  onImagePicked(event:Event)
+  {
+    
+    const file=(event.target as HTMLInputElement).files[0];
+    
+    if(file==undefined)
+    {
+      return;
+    }
+    this.formGroup.patchValue({image:file});
+    //this.formGroup.get('image');
+    const reader= new FileReader();
+    reader.onload=()=>
+    {
+      this.imagePreview=reader.result;
+    };
+    reader.readAsDataURL(file);
+    
+  }
   
   onSubmit()
   { 
-   
+   alert('fd');
     if (this.formGroup.valid) {
         
           if(this.mode=='edit')
         {
+         
+          
           this.dataService.updateEmployee(this.employeeId,this.formGroup.value);
         
         }
         else{
+        
           this.dataService.postEmpolyees(this.formGroup.value);
           this.formGroup.reset();
         }
-    } else {
-      this.validateAllFormFields(this.formGroup);
-    }
+    } 
    
     
    
   }
   ngOnInit() {
+    this.formGroup = new FormGroup({
+      last_name: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      first_name: new FormControl(null, { validators: [Validators.required] }),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      }),
+      hire_date: new FormControl(null, { validators: [Validators.required] }),
+      birth_date: new FormControl(null, { validators: [Validators.required] }),
+      gender: new FormControl(null, { validators: [Validators.required] })
+    });
     
+   
+
     this.route.paramMap.subscribe((paramMap:ParamMap)=>{
       if(paramMap.has('employeeId'))
       {
@@ -60,8 +98,19 @@ export class EmployeecreateComponent implements OnInit {
             swal.fire('not found',"id doesn't exist",'warning');
             return;
           }
+
           this.employee=new Employee(res);
           
+          this.formGroup.setValue({
+            
+            first_name:this.employee.first_name,
+            last_name:this.employee.last_name,
+            hire_date:this.employee.hire_date,
+            birth_date:this.employee.birth_date,
+            gender:this.employee.gender,
+            image:this.employee.imageUrl
+          });
+          this.imagePreview=this.employee.imageUrl;
         });
         this.mode='edit';
       }
@@ -70,36 +119,12 @@ export class EmployeecreateComponent implements OnInit {
         this.mode='create';
       }
     });
-    this.formGroup = this.formBuilder.group({
-      
-      last_name: [null, [Validators.required]],
-      first_name:[null,[Validators.required]],
-      hire_date: [null, [Validators.required]],
-      birth_date:[null,[Validators.required]],
-      gender: [null, [Validators.required]]
-     
-    });
+   
+    
     
    
   }
-  isFieldValid(field: string) {
-    return !this.formGroup.get(field).valid && this.formGroup.get(field).touched;
-  }
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field),
-      'has-feedback': this.isFieldValid(field)
-    };
-  }
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      console.log(field);
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
+ 
+ 
+ 
 }

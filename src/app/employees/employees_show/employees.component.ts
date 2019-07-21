@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import{ApiService} from '../employeeapi.service';
 import { Subscription } from 'rxjs';
 import{Employee} from'../employee';
+
 import { ActivatedRoute, ParamMap } from '@angular/router';
 //import{Employee} from './employee.model';
 @Component({
@@ -12,6 +13,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class EmployeesComponent implements OnInit ,OnDestroy {
   employees:Employee[]=[];
   page:number=1;
+  show=true;
   private empSub:Subscription;
   employeeId:string;
   employee:Employee;
@@ -24,7 +26,13 @@ export class EmployeesComponent implements OnInit ,OnDestroy {
 
     this.isLoading=true;
     this.dataService.getEmpolyees();
-    this.empSub= this.dataService.getEmployeeUpdateListener().subscribe((employess)=>{
+    this.empSub=this.dataService.getEmployeeUpdateListener().subscribe((employess:Employee[])=>{
+      if(employess==undefined||employess.length<=0)
+      {
+        this.show=false;
+        this.isLoading=false;
+        return;
+      }
       this.employees=employess;
       this.isLoading=false;
     });
@@ -34,4 +42,5 @@ export class EmployeesComponent implements OnInit ,OnDestroy {
   {
     this.empSub.unsubscribe();
   }
+  
 }

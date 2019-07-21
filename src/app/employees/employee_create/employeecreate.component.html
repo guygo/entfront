@@ -4,27 +4,25 @@
           <form  (submit)="onSubmit()" [formGroup]="formGroup" class="form-inlineclass" form-horizontal>
             <div class="row">
                     <div class="col-md-5 ">
-                        <div class="form-group" [ngClass]="displayFieldCss('first_name')">
+                        <div class="form-group">
                         <label for="first_name" class="control-label required">First name</label>
-                        <input type="text"  id="first_name"  formControlName="first_name" class="form-control" [ngModel]="employee?.first_name">
-                        <app-field-error-display [displayError]="isFieldValid('first_name')" errorMsg="Please enter first name">
-                                </app-field-error-display>
+                        <input type="text"  id="first_name"  formControlName="first_name" class="form-control" >
+                        
                         </div>
                         <div>
                             
                         </div>
                         
-                        <div class="form-group" [ngClass]="displayFieldCss('last_name')">
+                        <div class="form-group" >
                                 <label for="last_name" class="control-label required">Last name</label>
-                        <input type="text"   class="form-control" [ngModel]="employee?.last_name" formControlName="last_name"  id="last_name">
-                        <app-field-error-display [displayError]="isFieldValid('last_name')" errorMsg="Please enter last name">
-                                </app-field-error-display>
+                        <input type="text"   class="form-control"  formControlName="last_name"  id="last_name">
+                       
                       
                         </div>
                     </div>
                     
                     <div class="col-md-5 ">
-                            <div class="form-group" [ngClass]="displayFieldCss('hire_date')">
+                            <div class="form-group" >
                             <label for="hire_date" class="control-label required">hire date</label>
                            
                             <input type="text"
@@ -33,47 +31,52 @@
                             class="form-control"
                             bsDatepicker
                             id="hire_date"
-                            [ngModel]="employee?.hire_date"
+                            
                             [bsConfig]="{ isAnimated: true }" >
                    
-                            <app-field-error-display [displayError]="isFieldValid('hire_date')" errorMsg="Please enter valid date">
-                                </app-field-error-display>  
+                            
                             </div>
                             <div>
                                 
                             </div>
                             
-                            <div class="form-group" [ngClass]="displayFieldCss('birth_date')">
+                            <div class="form-group" >
                                     <label for="birth_date" class="control-label required">birth date</label>
                                     <input type="text"
                                     id="birth_date"
                             placeholder="Datepicker"
                             class="form-control"
                             bsDatepicker
-                            
+                            (change)="onImagePicked($event)"
                             formControlName="birth_date"
-                            [bsConfig]="{ isAnimated: true }" [ngModel]="employee?.birth_date">
-                            <app-field-error-display [displayError]="isFieldValid('birth_date')" errorMsg="Please enter valid date">
-                                </app-field-error-display>  
+                            [bsConfig]="{ isAnimated: true }" >
+                            
                         </div>
                         </div>
                         <div class="col-md-5">
-                                <div class="form-group" [ngClass]="displayFieldCss('gender')">
+                                <div class="form-group" >
                                         <label for="sel1" class="control-label required">Gender:</label>
-                                        <select   formControlName="gender" class="form-control" id="sel1" [ngModel]="employee?.gender">
-                                          <option>M</option>
+                                        <select   formControlName="gender" class="form-control" id="sel1"  >
+                                          <option >M</option>
                                           <option>F</option>
                                           
                                         </select>
-                                        <app-field-error-display [displayError]="isFieldValid('gender')" errorMsg="Please pick gender">
-                                </app-field-error-display>
+                                        
                                       </div>
                             </div>
                 </div>
+                <div>
+                <button class="btn btn-success" type="button" (click)="fileinput.click()">pick a image</button>
+                <input type="file" #fileinput (change)="onImagePicked($event)">
+                <div class="media-right" *ngIf="imagePreview !=='' &&imagePreview">
+                        <img [src]="imagePreview"  class="media-object" style="width:160px">
+                </div>
+                </div>
             <br>
-           
+            <br>
             <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
-          </form>
+          
+        </form>
         </div>
       </div>
     

@@ -10,25 +10,31 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DepartmentsComponent } from './departments/departments.component';
 import { EmployeecreateComponent } from './employees/employee_create/employeecreate.component';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
-import { ValidateFieldsSubmitFormComponent } from './simpleForm/simple-form.component';
+
+
+import { EmployeprofileComponent } from './employees/employeprofile/employeprofile.component';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
+import { AuthInterceptor } from './login/auth-interceptor';
+import { HomePageComponent } from './home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
-    FieldErrorDisplayComponent,
     PageNotFoundComponentComponent,
-   
     DepartmentsComponent,
-    ValidateFieldsSubmitFormComponent,
-    EmployeecreateComponent
+    EmployeecreateComponent,
+    EmployeprofileComponent,
+    LoginComponent,
+    HeaderComponent,
+    HomePageComponent
     
   ],
   imports: [
@@ -53,7 +59,7 @@ import { ValidateFieldsSubmitFormComponent } from './simpleForm/simple-form.comp
   })
   ],
   
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

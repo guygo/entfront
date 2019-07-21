@@ -1,5 +1,7 @@
 <div class="loader" *ngIf="isLoading"></div>
-<div *ngIf="!isLoading">
+<div  class="well" *ngIf="!isLoading&&!show">didn't get any data</div>
+
+<div *ngIf="!isLoading&&show">
 <table class="table">
         <thead>
           <tr>
@@ -12,7 +14,7 @@
         <tbody>
                 <tr *ngFor="let item of employees | paginate: { itemsPerPage: 50, currentPage: page }">
                        
-                        <td>{{item.first_name}}</td>
+                        <td><a [routerLink]="['/showProfile',item.id]">{{item.first_name}}</a></td>
                         <td>{{item.last_name}}</td>
                         <td>{{item.hire_date.toLocaleDateString()}}</td>
                         <td>{{item.birth_date.toLocaleDateString()}}</td>
