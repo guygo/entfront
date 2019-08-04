@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import{ApiService} from '../employeeapi.service';
+import{EmployeeApiService} from '../employeeapi.service';
 import { Subscription } from 'rxjs';
 import{Employee} from'../employee';
 
@@ -18,7 +18,7 @@ export class EmployeesComponent implements OnInit ,OnDestroy {
   employeeId:string;
   employee:Employee;
   isLoading=false;
-  constructor(public dataService: ApiService,public route:ActivatedRoute) { 
+  constructor(public dataService: EmployeeApiService,public route:ActivatedRoute) { 
    
   }
 

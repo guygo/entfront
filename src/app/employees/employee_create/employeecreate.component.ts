@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import{ApiService} from '../employeeapi.service';
+import{EmployeeApiService} from '../employeeapi.service';
 import { FormGroup} from "@angular/forms";
 import swal from 'sweetalert2';
 import { Validators,
   FormControl } from "@angular/forms";
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Employee } from '../employee';
 import {mimeType} from "./mime-type.validator"
 
@@ -21,7 +21,7 @@ export class EmployeecreateComponent implements OnInit {
   mode='create';
   
   message; 
-  constructor(public dataService: ApiService,public route:ActivatedRoute) { 
+  constructor(public dataService: EmployeeApiService,public route:ActivatedRoute) { 
    
   }
 
@@ -37,7 +37,7 @@ export class EmployeecreateComponent implements OnInit {
       return;
     }
     this.formGroup.patchValue({image:file});
-    //this.formGroup.get('image');
+   
     const reader= new FileReader();
     reader.onload=()=>
     {
@@ -46,10 +46,10 @@ export class EmployeecreateComponent implements OnInit {
     reader.readAsDataURL(file);
     
   }
-  
+ 
   onSubmit()
   { 
-   alert('fd');
+   
     if (this.formGroup.valid) {
         
           if(this.mode=='edit')
@@ -65,9 +65,7 @@ export class EmployeecreateComponent implements OnInit {
           this.formGroup.reset();
         }
     } 
-   
-    
-   
+  
   }
   ngOnInit() {
     this.formGroup = new FormGroup({
@@ -119,9 +117,6 @@ export class EmployeecreateComponent implements OnInit {
         this.mode='create';
       }
     });
-   
-    
-    
    
   }
  

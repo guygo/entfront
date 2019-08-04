@@ -24,6 +24,12 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthInterceptor } from './login/auth-interceptor';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AccordionComponent } from './accordion/accordion.component';
+import { AccordionGroupComponent } from './accordion-group/accordion-group.component';
+import { SalaryComponent } from './salary/salary.component';
+import { TitleComponent } from './title/title.component';
+import { EventCalendarComponent } from './event-calendar/event-calendar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +40,12 @@ import { HomePageComponent } from './home-page/home-page.component';
     EmployeprofileComponent,
     LoginComponent,
     HeaderComponent,
-    HomePageComponent
+    HomePageComponent,
+    AccordionComponent,
+    AccordionGroupComponent,
+    SalaryComponent,
+    TitleComponent,
+    EventCalendarComponent
     
   ],
   imports: [

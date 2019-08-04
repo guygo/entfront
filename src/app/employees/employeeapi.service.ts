@@ -10,11 +10,29 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
   providedIn: 'root'
 })
 
-export class ApiService {
+export class EmployeeApiService {
   private employeeUpdate= new Subject<Employee[]>();
-  apiURL: string = 'http://localhost:3000';
+  apiURL: string = 'http://localhost:3000/api';
   employees:Employee[];
   constructor(private httpClient: HttpClient,private router:Router) {}
+  public postSalary(data,id)
+  {
+    alert(JSON.stringify(data));
+    this.httpClient.post<{message:string}>(`${this.apiURL}/Employees/`+id+'/salary',data).subscribe((message)=>{
+      
+      console.log(message);
+      this.router.navigate(["employees/"+id+"/title"]);
+     });
+  }
+  public postTitle(data,id)
+  {
+    alert(JSON.stringify(data));
+    this.httpClient.post<{message:string}>(`${this.apiURL}/Employees/`+id+'/title',data).subscribe((message)=>{
+      
+      console.log(message);
+      this.router.navigate(["/"]);
+     });
+  }
   public  postEmpolyees(data)
   {
     const formData=new FormData();
@@ -25,11 +43,19 @@ export class ApiService {
     formData.append("birth_date",data.birth_date);
     formData.append("gender",data.gender);
     formData.append("image",data.image,data.first_name);
-    this.httpClient.post(`${this.apiURL}/employees`,formData).subscribe((message)=>{
+    this.httpClient.post<{message:string,id:string}>(`${this.apiURL}/employees`,formData).subscribe((message)=>{
      console.log(message);
-     this.router.navigate(["/"]);
+     this.router.navigate(["employees/"+message.id+"/salary"]);
     });
    
+  }
+  gettitle(id)
+  {
+    return this.httpClient.get(`${this.apiURL}/employees/title/`+id);
+  }
+  getSalary(id)
+  {
+    return this.httpClient.get(`${this.apiURL}/employees/salary/`+id);
   }
   updateEmployee(id,employee)
   {

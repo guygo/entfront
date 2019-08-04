@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../employeeapi.service';
+import { EmployeeApiService } from '../employeeapi.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Employee } from '../employee';
 
@@ -13,7 +13,9 @@ export class EmployeprofileComponent implements OnInit {
   employee:Employee;
   employeeId: string;
   image:string;
-  constructor(public dataService: ApiService,public route:ActivatedRoute) { }
+  salary:number;
+  title:string;
+  constructor(public dataService: EmployeeApiService,public route:ActivatedRoute) { }
 
   ngOnInit() {
    
@@ -24,17 +26,26 @@ export class EmployeprofileComponent implements OnInit {
        
         this.employeeId=paramMap.get('employeeId');
         console.dir(paramMap.get('employeeId'));
+       // this.dataService.getSalary(this.employeeId).subscribe((res : any[])=>{
+          
+          
+        //  this.salary=res[0].salary; 
+        //});
+        this.salary=100;
         this.dataService.getEmpolyeeById(this.employeeId).subscribe(res=>{
-      
+          alert(JSON.stringify(res));
           if(res.message=='not found')
           {
               return;
           }
          
           this.employee=new Employee(res);
+          console.log(JSON.stringify(this.employee));
           this.image=this.employee.imageUrl;
-          
-        });
+        
+    
+          });
+       
         
       }
      

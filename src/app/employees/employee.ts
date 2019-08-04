@@ -8,12 +8,12 @@ export class Employee {
     gender:string;
     constructor(json)
     {
-       this.id=json.emp_no;
-       this.hire_date=new Date(json.hire_date);
-       this.first_name=json.first_name;
-       this.last_name=json.last_name;
-       this.imageUrl=json.image_url;
-       this.birth_date=new Date(json.birth_date);
+       this.id=json._id;
+       this.hire_date=new Date(json.hireDate);
+       this.first_name=json.firstName;
+       this.last_name=json.lastName;
+       this.imageUrl=json.imgUrl;
+       this.birth_date=new Date(json.birthDate);
        this.gender=json.gender;
     }
     

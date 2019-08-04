@@ -8,6 +8,8 @@ import { EmployeprofileComponent } from './employees/employeprofile/employeprofi
 import { LoginComponent } from './login/login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AuthGuard } from './login/auth.Guard';
+import { SalaryComponent } from './salary/salary.component';
+import { TitleComponent } from './title/title.component';
 const routes: Routes = [
   {path:'showProfile/:employeeId',component:EmployeprofileComponent},
   {path:'',component:HomePageComponent},
@@ -15,6 +17,8 @@ const routes: Routes = [
   {path:'employees',component:EmployeesComponent,canActivate:[AuthGuard]},
   {path:'createemployee',component:EmployeecreateComponent,canActivate:[AuthGuard]},
   {path:'editemployee/:employeeId',component:EmployeecreateComponent,canActivate:[AuthGuard]},
+  {path:'employees/:employeeId/salary',component:SalaryComponent,canActivate:[AuthGuard]},
+  {path:'employees/:employeeId/title',component:TitleComponent,canActivate:[AuthGuard]},
   { path: '**', component: PageNotFoundComponentComponent }
 ];
 

@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 export class AuthService
 {
     constructor(private httpClient: HttpClient,private router:Router) {}
-    private apiURL: string = 'http://localhost:3000/Auth';
+    private apiURL: string = 'http://localhost:3000/api/Auth';
     private token:string;
     private tokenTimer:any;
     private isAuth:boolean=false;
@@ -16,7 +16,7 @@ export class AuthService
     {
       this.httpClient.post<{token:string,expiresIn:number}>(this.apiURL+'/login',user).subscribe(res =>
         {
-         
+      
           this.token=res.token;
           if(this.token){
             const expiresDuration=res.expiresIn;
@@ -24,6 +24,9 @@ export class AuthService
             this.isAuth=true;
             this.authListener.next(true);
             const now= new Date();
+          
+            const d=new Date(now.getTime()+expiresDuration*10000);
+          
             this.saveAuthData(this.token,new Date(now.getTime()+expiresDuration*1000));
             this.router.navigate(['/']);
           }

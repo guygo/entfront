@@ -1,0 +1,29 @@
+<div  #body>
+<table class="calendar table table-bordered">
+    <thead class="header">
+        <tr>
+            <th class="header">mon</th>
+            <th class="header">tue</th>
+            <th class="header">wed</th>
+            <th class="header">thu</th>
+            <th class="header">fri</th>
+            <th class="header">sat</th>
+            <th class="header">sunday</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class=" week" *ngFor="let week of days">
+                 
+                <td  id={{day.day}} [ngClass]="day.off"  *ngFor="let day of week">{{day.day}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+
+</div>
+<div class="btn-group">
+    <button (click)="addEvent()" class="btn btn-info">add event</button>
+    <button (click)="save()" class="btn btn-info">save</button>
+</div>
+
+</div>
