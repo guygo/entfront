@@ -17,19 +17,16 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { EmployeecreateComponent } from './employees/employee_create/employeecreate.component';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
-
 import { EmployeprofileComponent } from './employees/employeprofile/employeprofile.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthInterceptor } from './login/auth-interceptor';
 import { HomePageComponent } from './home-page/home-page.component';
-import { AccordionComponent } from './accordion/accordion.component';
-import { AccordionGroupComponent } from './accordion-group/accordion-group.component';
 import { SalaryComponent } from './salary/salary.component';
 import { TitleComponent } from './title/title.component';
 import { EventCalendarComponent } from './event-calendar/event-calendar.component';
-
+import { ModalComponentComponent } from './modal-component/modal-component.component';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,14 +38,14 @@ import { EventCalendarComponent } from './event-calendar/event-calendar.componen
     LoginComponent,
     HeaderComponent,
     HomePageComponent,
-    AccordionComponent,
-    AccordionGroupComponent,
     SalaryComponent,
     TitleComponent,
-    EventCalendarComponent
+    EventCalendarComponent,
+    ModalComponentComponent
     
   ],
   imports: [
+    AmazingTimePickerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,

@@ -9,16 +9,12 @@ import { Router } from '@angular/router';
 
 export class CalendarApiService {
   apiURL: string = 'http://localhost:3000/api/calendar';
-  
   constructor(private httpClient: HttpClient,private router:Router) {}
   public postEvent(data)
   {
-    
     this.httpClient.post(`${this.apiURL}/`,data).subscribe((message)=>{
-      
       console.log(message);
-     
-     });
+    });
   }
  
 }

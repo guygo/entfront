@@ -1,11 +1,4 @@
-.calendar{
- 
-}
-.header{
-  
- 
-  
-}
+
 .week{
 
    height: 120px;
@@ -14,14 +7,16 @@
 .day{
   text-align: right;
   font-size: 17px;
-  height: 150px;
-  width:100px;
+  
+  width:80px;
   background:rgb(254, 253, 252);
 }
 .day:hover{
   background: lightgray;
 }
 .dayoff{
+  
+  width:80px;
   font-size: 17px;
   text-align: right;
   color: rgba(#98a0a6, 0.6);
@@ -46,11 +41,40 @@
 
 }
 .circle {
-  position: absolute;
+  float: right;
   visibility: visible;
   z-index: 200;
   width: 15px;
   height: 15px;
   border-radius: 50%;
   background: #288feb;
+}
+
+#next{
+  float: right;
+}
+#prev{
+  float: left;
+}
+#month{
+  margin: auto;
+  width: 20%;
+  border: #288feb;
+  border-style: groove ;
+  text-align: center;
+
+}
+.box{
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+.selectdropdown{
+  width: 100%;
+}
+.eventbox{
+  margin-top: 60px;
+ 
+  overflow: hidden;
+  width: 180px;
 }

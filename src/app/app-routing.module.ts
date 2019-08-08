@@ -10,10 +10,12 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AuthGuard } from './login/auth.Guard';
 import { SalaryComponent } from './salary/salary.component';
 import { TitleComponent } from './title/title.component';
+import { EventCalendarComponent } from './event-calendar/event-calendar.component';
 const routes: Routes = [
   {path:'showProfile/:employeeId',component:EmployeprofileComponent},
   {path:'',component:HomePageComponent},
   {path:'login',component:LoginComponent},
+  {path:'calendar',component:EventCalendarComponent,canActivate:[AuthGuard]},
   {path:'employees',component:EmployeesComponent,canActivate:[AuthGuard]},
   {path:'createemployee',component:EmployeecreateComponent,canActivate:[AuthGuard]},
   {path:'editemployee/:employeeId',component:EmployeecreateComponent,canActivate:[AuthGuard]},

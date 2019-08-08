@@ -10,7 +10,7 @@
             <li *ngIf="authenticate"><a routerLink="">
               home <span class="sr-only">(current)</span>
             </a></li>
-            
+            <li *ngIf="authenticate"><a routerLink="/calendar"  >Event calendar</a></li>
             <li *ngIf="authenticate" class="dropdown" dropdown> 
                 <a dropdownToggle role="button"> 
                   Employees <span class="caret"></span></a>

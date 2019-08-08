@@ -1,29 +1,67 @@
-<div  #body>
-<table class="calendar table table-bordered">
-    <thead class="header">
-        <tr>
-            <th class="header">mon</th>
-            <th class="header">tue</th>
-            <th class="header">wed</th>
-            <th class="header">thu</th>
-            <th class="header">fri</th>
-            <th class="header">sat</th>
-            <th class="header">sunday</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class=" week" *ngFor="let week of days">
-                 
-                <td  id={{day.day}} [ngClass]="day.off"  *ngFor="let day of week">{{day.day}}</td>
-        </tr>
-    </tbody>
-</table>
-<div class="row">
+
+<div  >
+    <div class="row" id="sidemain">
+        <div class="col-md-2">
+            <div class="row">
+                <select class="selectdropdown" (change)='selectedMonth($event.target.value)' value="January" >
+                    <option *ngFor='let m of months; let i = index ' value={{i}}>{{m}}</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="btn-group-vertical" style='width:100%;'>
+                    <button (click)="addEvent()" style='width:100%;' class="btn btn-info">add event</button>
+                    <button (click)="save()" style='width:100%;' class="btn btn-success">save</button>
+                   </div>
+            </div>
+        </div>
+        <div class="col-md-10 " id='table'>
+            <div class='box'>
+                <button id="next" (click)='next()' class="btn btn-primary">next month</button>
+                <div  id='month'  [innerHTML]="htmlMonth"></div>
+                <button id="prev" (click)='prev()' class="btn btn-primary">prev month</button>
+            </div>
+            <table class="calendar table table-bordered">
+                <thead class="header">
+                    <tr>
+                        <th class="header">Monday</th>
+                        <th class="header">Tuesday</th>
+                        <th class="header">Wednesday</th>
+                        <th class="header">Thursday</th>
+                        <th class="header">Friday</th>
+                        <th class="header">Saturday</th>
+                        <th class="header">sunday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class=" week" *ngFor="let week of days">
+                        <td  (click)="day.off=='day'?select($event):''" id={{day.day}} [ngClass]="day.off"  *ngFor="let day of week">{{day.day}}<div class='eventbox'></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
 </div>
-<div class="btn-group">
-    <button (click)="addEvent()" class="btn btn-info">add event</button>
-    <button (click)="save()" class="btn btn-info">save</button>
-</div>
-
-</div>
+<jw-modal id="custom-modal-1">
+    <div class="container">
+    <h1>Add Event</h1>
+   
+        <div class="form-group">
+            <input atp-time-picker value="19:00" #time />
+        </div>
+        <div class="form-group">
+            <label for = "desc">title</label>
+            <input type="text" class="form-control" placeholder="" name="title" [(ngModel)]="title"/>
+        </div>
+        <div class="form-group">
+                <label for = "desc">description</label>
+                <textarea class = "form-control" name="desc" rows = "3" [(ngModel)]="description"></textarea>
+        </div>
+          
+        <button class="btn btn-success" (click)="saveModal(title,description,time.value,'custom-modal-1')">save</button>
+      
+      
+   
+    </div>
+</jw-modal>
